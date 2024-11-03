@@ -13,5 +13,10 @@ namespace ContactSystem.Controllers
         {
             return View();
         }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }
