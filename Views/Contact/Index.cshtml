@@ -1,4 +1,12 @@
-﻿<div class="text-center">
+﻿@{
+    ViewData["Title"] = "Contatos";
+}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
+    <a class="btn btn-primary" role="button" asp-controller="Contact" asp-action="Create">Adicionar contato</a>
+</div>
+
+<div class="text-center">
     <h1 class="text-center mb-3 display-4">Contatos</h1>
 
     <table class="table">
