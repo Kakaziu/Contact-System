@@ -1,4 +1,6 @@
 using ContactSystem.Data;
+using ContactSystem.Repositories;
+using ContactSystem.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactSystem
@@ -15,6 +17,8 @@ namespace ContactSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
             var app = builder.Build();
 
