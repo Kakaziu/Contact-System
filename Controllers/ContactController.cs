@@ -29,9 +29,20 @@ namespace ContactSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ContactModel contact)
         {
-            await _contactRepository.Insert(contact);
+            try
+            {
+                if(ModelState.IsValid)
+                {
+                    await _contactRepository.Insert(contact);
 
-            return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View();
+            } catch(Exception)
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -47,13 +58,18 @@ namespace ContactSystem.Controllers
         {
             try
             {
-                contact.Id = id;
-                await _contactRepository.Update(contact, id);
+                if(ModelState.IsValid)
+                {
+                    contact.Id = id;
+                    await _contactRepository.Update(contact, id);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View();
             } catch(Exception)
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
