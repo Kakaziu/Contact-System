@@ -34,13 +34,15 @@ namespace ContactSystem.Controllers
                 if(ModelState.IsValid)
                 {
                     await _contactRepository.Insert(contact);
-
+                    TempData["SuccessMessage"] = "Contato cadastrado.";
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View();
-            } catch(Exception)
+
+                return View(contact);
+            } catch(Exception ex)
             {
+                TempData["ErrorMessage"] = $"Ops, tivemos um erro ao cadastrar seu contato, confira os detalhes do erro: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -62,13 +64,14 @@ namespace ContactSystem.Controllers
                 {
                     contact.Id = id;
                     await _contactRepository.Update(contact, id);
-
+                    TempData["SuccessMessage"] = "Contato alterado.";
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View();
-            } catch(Exception)
+                return View(contact);
+            } catch(Exception ex)
             {
+                TempData["ErrorMessage"] = $"Ops, tivemos um erro ao alterar seu contato, confira os detalhes do erro: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -84,11 +87,20 @@ namespace ContactSystem.Controllers
         {
             try
             {
-                await _contactRepository.Delete(id);
+                bool isDeleted = await _contactRepository.Delete(id);
 
-                return RedirectToAction(nameof(Index));
-            }catch(Exception)
+                if (isDeleted)
+                {
+                    TempData["SuccessMessage"] = "Contato apagado.";
+                    return RedirectToAction(nameof(Index));
+                } else
+                {
+                    TempData["ErrorMessage"] = "Não foi possível apagar o contato.";
+                    return RedirectToAction(nameof(Index));
+                }
+            }catch(Exception ex)
             {
+                TempData["ErrorMessage"] = $"Ops, tivemos um erro ao apagar seu contato, confira os detalhes do erro: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
