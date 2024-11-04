@@ -58,6 +58,7 @@ namespace ContactSystem.Repositories
             if (contact == null) throw new Exception("Não foi possível apagar seu contato.");
 
             _context.Contacts.Remove(contact);
+            await _context.SaveChangesAsync();
 
             return true;
         }

@@ -34,9 +34,11 @@ namespace ContactSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var contact = await _contactRepository.FindById(id);
+
+            return View(contact);
         }
 
         [HttpPost]
@@ -55,9 +57,11 @@ namespace ContactSystem.Controllers
             }
         }
 
-        public IActionResult ConfirmDelete()
+        public async Task<IActionResult> ConfirmDelete(int id)
         {
-            return View();
+            var contact = await _contactRepository.FindById(id);
+
+            return View(contact);
         }
 
         public async Task<IActionResult> Delete(int id)
