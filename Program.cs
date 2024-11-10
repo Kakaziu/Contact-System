@@ -19,6 +19,7 @@ namespace ContactSystem
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 
