@@ -1,0 +1,54 @@
+﻿@model LoginModel;
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutLogin";
+}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-70">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="btn btn-danger btn-sm close-alert">X</button>
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
+
+                        <div class="mb-md-1 mt-md-4 pb-3">
+
+                            <form asp-controller="Login" asp-action="Entry">
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Adicione suas credenciais!</p>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="Email">E-mail</label>
+                                    <input type="email" asp-for="Email" id="Email" class="form-control form-control-lg" />
+                                    @Html.ValidationMessageFor(x => x.Email)
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="Password">Senha</label>
+                                    <input type="password" asp-for="Password" id="Password" class="form-control form-control-lg" />
+                                    @Html.ValidationMessageFor(x => x.Password)
+                                </div>
+
+                                <button value="Entry" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <p class="mb-0">
+                                Não tem uma conta? <a class="text-white-50 fw-bold" asp-controller="User" asp-action="Create">Faça seu cadastro</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

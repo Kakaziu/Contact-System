@@ -14,6 +14,11 @@ namespace ContactSystem.Repositories
             _context = context;
         }
 
+        public async Task<UserModel> FindByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email.ToUpper() == email.ToUpper());
+        }
+
         public async Task<List<UserModel>> FindAll()
         {
             var users = await _context.Users.ToListAsync();

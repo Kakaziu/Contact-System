@@ -10,9 +10,14 @@ namespace ContactSystem.Models
         [Required(ErrorMessage = "O campo 'E-mail' precisa ser preenchido")]
         [EmailAddress(ErrorMessage = "E-mail inválido")]
         public string? Email { get; set; }
-        [Required(ErrorMessage = "O campo 'Password' precisa ser preenchido")]
+        [Required(ErrorMessage = "O campo 'Senha' precisa ser preenchido")]
         public string? Password { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastUpdatedAt { get; set; }
+
+        public bool ValidPassword(string password)
+        {
+            return Password == password;
+        }
     }
 }
