@@ -1,0 +1,53 @@
+﻿@model UserModel;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_LayoutLogin";
+}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-70">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-1 mt-md-4 pb-3">
+
+                            <form asp-controller="User" asp-action="Create">
+                                <h2 class="fw-bold mb-2 text-uppercase">Cadastrar</h2>
+                                <p class="text-white-50 mb-5">Adicione seus dados!</p>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="Name">Nome</label>
+                                    <input type="text" asp-for="Name" id="Name" class="form-control form-control-lg" />
+                                    @Html.ValidationMessageFor(x => x.Name)
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="Email">E-mail</label>
+                                    <input type="email" asp-for="Email" id="Email" class="form-control form-control-lg" />
+                                    @Html.ValidationMessageFor(x => x.Email)
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <label class="form-label" for="Password">Senha</label>
+                                    <input type="password" asp-for="Password" id="Password" class="form-control form-control-lg" />                                  
+                                    @Html.ValidationMessageFor(x => x.Password)
+                                </div>
+
+                                <button value="Create" class="btn btn-outline-light btn-lg px-5" type="submit">Cadastrar</button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <p class="mb-0">
+                                Já tem uma conta? <a class="text-white-50 fw-bold" asp-controller="Login" asp-action="Index">Faça login</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

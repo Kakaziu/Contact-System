@@ -35,7 +35,7 @@ namespace ContactSystem.Controllers
                 {
                     await _userRepository.Insert(user);
 
-                    return View(user);
+                    return RedirectToAction("Index", "Contact");
                 }
 
                 return View();

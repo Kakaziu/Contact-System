@@ -1,0 +1,36 @@
+﻿@model List<UserModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
+    <a class="btn btn-primary" role="button" asp-controller="User" asp-action="Create">Adicionar</a>
+</div>
+
+<div class="text-center">
+    <h2 class="display-4">Listagem de contatos</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <th scope="row">@user.Id</th>
+                        <td>@user.Name</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
