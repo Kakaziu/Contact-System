@@ -25,13 +25,13 @@ namespace ContactSystem
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserSession, UserSession>();
 
-            var app = builder.Build();
-
             builder.Services.AddSession(o =>
             {
                 o.Cookie.HttpOnly = true;
                 o.Cookie.IsEssential = true;
-            })
+            });
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -52,7 +52,7 @@ namespace ContactSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Contact}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }
