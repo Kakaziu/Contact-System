@@ -1,4 +1,5 @@
 using ContactSystem.Data;
+using ContactSystem.Helpers;
 using ContactSystem.Repositories;
 using ContactSystem.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,19 @@ namespace ContactSystem
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserSession, UserSession>();
 
             var app = builder.Build();
+
+            builder.Services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            })
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -37,6 +47,8 @@ namespace ContactSystem
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",
