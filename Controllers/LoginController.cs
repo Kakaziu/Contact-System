@@ -27,7 +27,7 @@ namespace ContactSystem.Controllers
         {
             _userSession.RemoveUserSession();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

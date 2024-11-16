@@ -13,5 +13,7 @@ namespace ContactSystem.Models
         [Required(ErrorMessage = "O campo 'Phone' tem que ser preenchido.")]
         [Phone(ErrorMessage = "Número de telefone inválido.")]
         public string? Phone { get; set; }
+        public int UserId { get; set; }
+        public UserModel? User { get; set; }
     }
 }

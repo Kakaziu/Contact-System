@@ -1,4 +1,5 @@
-﻿using ContactSystem.Models;
+﻿using ContactSystem.Helpers;
+using ContactSystem.Models;
 using ContactSystem.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,17 +8,24 @@ namespace ContactSystem.Controllers
     public class ContactController : Controller
     {
         private readonly IContactRepository _contactRepository;
+        private readonly IUserSession _userSession;
 
-        public ContactController(IContactRepository contactRepository) 
+        public ContactController(IContactRepository contactRepository, IUserSession session) 
         {
             _contactRepository = contactRepository;
+            _userSession = session;
         }
 
         public async Task<IActionResult> Index()
         {
-            var contacts = await _contactRepository.FindAll();
+            var user = _userSession.GetUserSession();
 
-            return View(contacts);
+            if (user == null) return RedirectToAction("Index", "Home");
+
+            var contacts = await _contactRepository.FindAll();
+            var userContacts = contacts.Where(x => x.UserId == user.Id).ToList();
+
+            return View(userContacts);
         }
 
         public IActionResult Create()
@@ -33,6 +41,10 @@ namespace ContactSystem.Controllers
             {
                 if(ModelState.IsValid)
                 {
+                    var user = _userSession.GetUserSession();
+
+                    contact.UserId = user.Id;
+
                     await _contactRepository.Insert(contact);
                     TempData["SuccessMessage"] = "Contato cadastrado.";
                     return RedirectToAction(nameof(Index));
