@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ContactSystem.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactSystem.Models
 {
@@ -17,7 +18,12 @@ namespace ContactSystem.Models
 
         public bool ValidPassword(string password)
         {
-            return Password == password;
+            return Password == password.GenerateHash();
+        }
+
+        public void SetPasswordHash()
+        {
+            Password = Password.GenerateHash();
         }
     }
 }

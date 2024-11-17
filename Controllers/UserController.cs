@@ -33,6 +33,7 @@ namespace ContactSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    user.SetPasswordHash();
                     await _userRepository.Insert(user);
 
                     return RedirectToAction("Index", "Login");
