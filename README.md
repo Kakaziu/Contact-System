@@ -16,20 +16,20 @@
 
 
 <h1 align="center">
-    <img src="./gifs/Animação.gif">
+    <img src="Animação.gif">
 </h1>
 
 <h1 align="center">
-    <img src="./gifs/Animação2.gif">
+    <img src="Animação2.gif">
 </h1>
 
 <h1 align="center">
-    <img src="./gifs/Animação3.gif">
+    <img src="Animação3.gif">
 </h1>
 
 
 <h1 align="center">
-    <img src="./gifs/Animação4.gif">
+    <img src="Animação4.gif">
 </h1>
 
 ## Pré requisitos
